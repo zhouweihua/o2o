@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.zwh.o2o.BaseTest;
 import com.zwh.o2o.entity.Area;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+
 public class AreaDaoTest extends BaseTest {
 	@Autowired
 	private AreaDao areaDao;
