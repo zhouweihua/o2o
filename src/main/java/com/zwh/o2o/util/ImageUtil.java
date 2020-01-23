@@ -2,6 +2,7 @@ package com.zwh.o2o.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -29,9 +30,9 @@ public class ImageUtil {
 	 * @param targetAddr
 	 * @return
 	 */
-	public static String generateThumbnail(File thumbnail, String targetAddr) {
+	public static String generateThumbnail(InputStream shopImgInputStream, String fileName, String targetAddr) {
 		String realFileName = getRandomFileName();
-		String extension = getFileExtesion(thumbnail);
+		String extension = getFileExtesion(fileName);
 		makeDirPath(targetAddr);
 		String relativeAddr = targetAddr + realFileName + extension;
 		logger.error("current relativeAddr is:" + relativeAddr);
@@ -40,7 +41,7 @@ public class ImageUtil {
 
 		logger.debug("current basePath addr is :" + basePath);
 		try {
-			Thumbnails.of(thumbnail).size(200, 200)
+			Thumbnails.of(shopImgInputStream).size(200, 200)
 					.watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/waterfall.png")), 0.25f)
 					.outputQuality(0.8).toFile(dest);
 		} catch (IOException e) {
@@ -101,9 +102,8 @@ public class ImageUtil {
 	 * @param thumbnail
 	 * @return
 	 */
-	private static String getFileExtesion(File cFile) {
-		String originalFilename = cFile.getName();
-		return originalFilename.substring(originalFilename.lastIndexOf("."));
+	private static String getFileExtesion(String fileName) {
+		return fileName.substring(fileName.lastIndexOf("."));
 	}
 
 

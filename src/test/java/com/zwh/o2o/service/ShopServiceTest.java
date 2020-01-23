@@ -1,11 +1,14 @@
 package com.zwh.o2o.service;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Date;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import static org.junit.Assert.assertEquals;
 
 import com.zwh.o2o.BaseTest;
 import com.zwh.o2o.dto.ShopExecution;
@@ -31,7 +34,7 @@ public class ShopServiceTest extends BaseTest {
         shop.setOwner(owner);
         shop.setArea(area);
         shop.setShopCategory(shopCategory);
-        shop.setShopName("测试的店铺1");
+        shop.setShopName("测试的店铺3");
         shop.setShopDesc("test1");
         shop.setShopAddr("test1");
         shop.setPhone("test1");
@@ -39,7 +42,8 @@ public class ShopServiceTest extends BaseTest {
         shop.setEnableStatus(ShopStateEnum.CHECK.getState());
         shop.setAdvice("审核中");
         File shopImg = new File("/Users/zhouweihua/Downloads/xxx.jpg");
-        ShopExecution se = shopService.addShop(shop, shopImg);
+        InputStream in = new FileInputStream(shopImg);
+        ShopExecution se = shopService.addShop(shop, in, shopImg.getName());
         assertEquals(ShopStateEnum.CHECK.getState(),se.getState());
 	}
 }
