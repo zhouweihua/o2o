@@ -24,7 +24,7 @@ public class AreaController {
 	
 	@Autowired
 	private AreaService areaService;
-	
+
 	@RequestMapping(value = "/listareas", method = RequestMethod.GET)
 	@ResponseBody // JSON格式
 	private Map<String, Object> listAreas() {
